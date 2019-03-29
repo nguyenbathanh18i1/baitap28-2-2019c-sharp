@@ -4,54 +4,68 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sinhvien
+namespace baiThucHanhCsharp28._3._2019
 {
+    class Book
+    {   //Khai bao thuoc tinh
+        private int MaSach;
+        private int NgayNhap;
+        private int DonGia;
+        private int SoLuong;
+
+        //Khai bao phuong thuc
+        public void NhapThongTinSach()
+        {   //Nhap ma sach
+            Console.Write("\nNhap Ma Sach: ");
+            MaSach = int.Parse(Console.ReadLine());
+            //Nhap ngay nhap
+            do
+            {
+                Console.Write("\nNhap Ngay Nhap: ");
+                NgayNhap = int.Parse(Console.ReadLine());
+
+                if (NgayNhap < 0 || NgayNhap > 31)
+                {
+                    Console.Write("\nNgay nhap khong hop le (1-31).");
+                }
+            } while (NgayNhap < 0 || NgayNhap > 31);
+            //Nhap Don gia
+            Console.Write("\nNhap don gia: ");
+            DonGia = int.Parse(Console.ReadLine());
+            //Nhap so luong
+            Console.Write("\nNhap so luong: ");
+            SoLuong = int.Parse(Console.ReadLine());
+        }
+        public void HienThiSach()
+        {
+            Console.Write("\n-----------------Hien Thi Sach:------------------");
+            Console.Write("\n Ma sach :{0}", MaSach);
+            Console.Write("\n Ngay nhap: {0}", NgayNhap);
+            Console.Write("\n Don gia: {0}", DonGia);
+            Console.Write("\n So luong sach: {0}", SoLuong);
+        }
+    }
     class Program
     {
         static void Main(string[] args)
         {
-            int n;
-            Console.WriteLine("nhap so sv:");
-            n = Int32.Parse(Console.ReadLine());
-            sinhvien[] sv = new sinhvien[n];
-            for (int i = 0; i < n; i++)
-            {
-                sv[i] = new sinhvien();
-                sv[i].nhap();
-                sv[i].IN();
-            }
-            float min = sv[0].tinhdtb();
-            for (int i = 1; i < n; i++)
-            {
-                if (sv[i].tinhdtb() < min)
-                    min = sv[i].tinhdtb();
-            }
-            Console.WriteLine("sv co diem thap nhat la{0}", min);
+            Console.Write("\nCau a");
+            Book sach1 = new Book();
 
-            for (int j = 0; j < n; j++)
-            {
-                for (int x = j + 1; x < n; x++)
-                {
-                    if (sv[x].tinhdtb() < sv[j].tinhdtb())
-                    {
-                        sinhvien sx = new sinhvien();
-                        sx = sv[j];
-                        sv[j] = sv[x];
-                        sv[x] = sx;
-                    }
-                }
-            }
-            Console.WriteLine("  sinh vien sau khi xap sep tang dan la:");
-            for (int j = 0; j < n; j++)
-                Console.WriteLine("sinh vien ma {0} co diem TB la : {1}", sv[j].masv, sv[j].tinhdtb());
+            sach1.NhapThongTinSach();
+            sach1.HienThiSach();
 
-            for (int i = 0; i < n; i++)
-            {
-                if (sv[i].masv.Contains("IT"))
-                    Console.WriteLine("sinh vien ma {0} co diem TB la:{1}", sv[i].masv, sv[i].tinhdtb());
+            Console.Write("\nCau b");
+            SachGiaoKhoa sach2 = new SachGiaoKhoa();
 
-            }
-            Console.ReadLine();
+            sach2.NhapThongTinSach();
+            sach2.HienThiSach();
+
+            Console.Write("\nCau c");
+            SachMain sach3 = new SachMain();
+            sach3.HienThiDanhSach();
+
+            Console.ReadKey();
         }
     }
 }
